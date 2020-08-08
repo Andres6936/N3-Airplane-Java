@@ -1,10 +1,10 @@
-package edu.jabs.airplane.test;
+package airplane;
 
 import junit.framework.TestCase;
 
-import edu.jabs.airplane.domain.Passenger;
-import edu.jabs.airplane.domain.Plane;
-import edu.jabs.airplane.domain.Seat;
+import airplane.Passenger;
+import airplane.Plane;
+import airplane.Seat;
 
 /**
  * Test class for the plane class

@@ -1,4 +1,4 @@
-package edu.jabs.airplane.domain;
+package airplane;
 
 /**
  * Seat of the plane

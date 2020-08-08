@@ -1,4 +1,4 @@
-package edu.jabs.airplane.domain;
+package airplane;
 
 /**
  * Plane

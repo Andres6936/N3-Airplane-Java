@@ -1,13 +1,13 @@
-package edu.jabs.airplane.gui;
+package airplane.interfaz;
 
 import java.awt.*;
 import java.text.*;
 
 import javax.swing.*;
 
-import edu.jabs.airplane.domain.Plane;
-import edu.jabs.airplane.domain.Seat;
-import edu.jabs.airplane.domain.Passenger;
+import airplane.Plane;
+import airplane.Seat;
+import airplane.Passenger;
 
 /**
  * Main window

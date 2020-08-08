@@ -1,12 +1,12 @@
-package edu.jabs.airplane.gui;
+package airplane.interfaz;
 
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
-import edu.jabs.airplane.domain.Plane;
-import edu.jabs.airplane.domain.Seat;
+import airplane.Plane;
+import airplane.Seat;
 
 /**
  * Drawing of the plane Pane

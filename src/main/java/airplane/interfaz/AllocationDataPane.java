@@ -1,11 +1,11 @@
-package edu.jabs.airplane.gui;
+package airplane.interfaz;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import edu.jabs.airplane.domain.Seat;
+import airplane.Seat;
 
 /**
  * Passenger record data pane

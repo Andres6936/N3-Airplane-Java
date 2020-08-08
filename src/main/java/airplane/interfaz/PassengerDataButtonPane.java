@@ -1,4 +1,4 @@
-package edu.jabs.airplane.gui;
+package airplane.interfaz;
 
 import java.awt.*;
 import java.awt.event.*;

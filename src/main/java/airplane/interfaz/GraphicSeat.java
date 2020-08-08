@@ -1,10 +1,10 @@
-package edu.jabs.airplane.gui;
+package airplane.interfaz;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-import edu.jabs.airplane.domain.Seat;
+import airplane.Seat;
 
 /**
  * Graphic representation of a plane seat

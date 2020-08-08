@@ -1,11 +1,11 @@
-package edu.jabs.airplane.gui;
+package airplane.interfaz;
 
 import java.awt.*;
 
 import javax.swing.*;
 
-import edu.jabs.airplane.domain.Seat;
-import edu.jabs.airplane.domain.Passenger;
+import airplane.Seat;
+import airplane.Passenger;
 
 /**
  * Form to submit data and registration of passenger
