@@ -1,6 +1,7 @@
 package airplane.interfaz;
 
 import java.awt.*;
+import java.util.Objects;
 
 import javax.swing.*;
 
@@ -30,18 +31,23 @@ public class GraphicSeat extends JPanel
      */
     public GraphicSeat( Seat seat )
     {
-        super( new BorderLayout( ) );
-        JLabel lSeat = new JLabel( );
-        if( seat.getClassSeat( ) == Seat.BUSINESS_CLASS && seat.isAssigned( ) )
-            image = new ImageIcon( "data/images/SeatBusinAssig.gif" );
-        else if( seat.getClassSeat( ) == Seat.BUSINESS_CLASS && !seat.isAssigned( ) )
-            image = new ImageIcon( "data/images/SeatBusinFree.gif" );
-        else if( seat.getClassSeat( ) == Seat.ECONOMIC_CLASS && seat.isAssigned( ) )
-            image = new ImageIcon( "data/images/SeatEconAssig.gif" );
-        else if( seat.getClassSeat( ) == Seat.ECONOMIC_CLASS && !seat.isAssigned( ) )
-        {
-            image = new ImageIcon( "data/images/SeatEconFree.gif" );
-            lSeat.setForeground( Color.white );
+        super(new BorderLayout());
+        JLabel lSeat = new JLabel();
+
+        ClassLoader loader = getClass().getClassLoader();
+
+        if (seat.getClassSeat() == Seat.BUSINESS_CLASS && seat.isAssigned())
+            image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatBusinAssig.gif")));
+        else
+            if (seat.getClassSeat() == Seat.BUSINESS_CLASS && !seat.isAssigned())
+                image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatBusinFree.gif")));
+            else
+                if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && seat.isAssigned())
+                    image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatEconAssig.gif")));
+                else
+                    if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && !seat.isAssigned()) {
+                        image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatEconFree.gif")));
+                        lSeat.setForeground(Color.white);
         }
         setPreferredSize( new Dimension( image.getIconWidth( ), image.getIconHeight( ) ) );
         setOpaque( false );
