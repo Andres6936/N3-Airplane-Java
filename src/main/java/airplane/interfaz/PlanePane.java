@@ -1,6 +1,7 @@
 package airplane.interfaz;
 
 import java.awt.*;
+import java.util.Objects;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -42,19 +43,21 @@ public class PlanePane extends JPanel
      */
     public PlanePane( Plane plane1 )
     {
-        super( new BorderLayout( ) );
+        super(new BorderLayout());
         plane = plane1;
-        image = new ImageIcon( "data/images/PlanePlan.gif" );
-        setPreferredSize( new Dimension( image.getIconWidth( ), image.getIconHeight( ) ) );
-        setOpaque( false );
+
+        ClassLoader loader = PlanePane.class.getClassLoader();
+        image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/PlanePlan.gif")));
+        setPreferredSize(new Dimension(image.getIconWidth(), image.getIconHeight()));
+        setOpaque(false);
 
         //The business seat images are added
-        JPanel businessPane = new JPanel( );
-        drawBusinessSeats( businessPane );
-        add( businessPane, BorderLayout.NORTH );
+        JPanel businessPane = new JPanel();
+        drawBusinessSeats(businessPane);
+        add(businessPane, BorderLayout.NORTH);
 
         //The economic seat images are added
-        JPanel economicPane = new JPanel( );
+        JPanel economicPane = new JPanel();
         drawEconomicSeats( economicPane );
         add( economicPane, BorderLayout.CENTER );
     }
