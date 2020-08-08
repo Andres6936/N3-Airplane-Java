@@ -1,6 +1,7 @@
 ### JetBrains
 .idea/
 build/
+*.iml
 
 ### Gradle
 .gradle/
