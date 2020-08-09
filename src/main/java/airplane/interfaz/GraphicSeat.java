@@ -1,8 +1,12 @@
 package airplane.interfaz;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import airplane.Seat;
@@ -10,8 +14,7 @@ import airplane.Seat;
 /**
  * Graphic representation of a plane seat
  */
-public class GraphicSeat extends JPanel
-{
+public class GraphicSeat extends JButton {
     //-----------------------------------------------------------------
     // GUI Fields
     //-----------------------------------------------------------------
@@ -27,46 +30,57 @@ public class GraphicSeat extends JPanel
     /**
      * It builds the graphic representation of the seat<br>
      * <b>post: </b> the seat image distinguish if it is available or occupied
+     *
      * @param seat - seat to be represented - seat != null
      */
-    public GraphicSeat( Seat seat )
-    {
-        super(new BorderLayout());
-        JLabel lSeat = new JLabel();
-
+    public GraphicSeat(Seat seat) {
         ClassLoader loader = getClass().getClassLoader();
 
-        if (seat.getClassSeat() == Seat.BUSINESS_CLASS && seat.isAssigned())
-            image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatBusinAssig.gif")));
-        else
-            if (seat.getClassSeat() == Seat.BUSINESS_CLASS && !seat.isAssigned())
-                image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatBusinFree.gif")));
-            else
-                if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && seat.isAssigned())
-                    image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatEconAssig.gif")));
-                else
-                    if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && !seat.isAssigned()) {
-                        image = new ImageIcon(Objects.requireNonNull(loader.getResource("data/images/SeatEconFree.gif")));
-                        lSeat.setForeground(Color.white);
+        try {
+            // Prepare the image for modify the color if is needed
+            BufferedImage bufferedImage = ImageIO.read(new File(
+                    Objects.requireNonNull(loader.getResource(
+                            "Icons/Expansion/Black/1x/figurine.png")).getFile()));
+
+            Image resize = bufferedImage.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+            BufferedImage buffer = new BufferedImage(25, 25, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D graphics2D = buffer.createGraphics();
+
+            graphics2D.drawImage(resize, 0, 0, null);
+            graphics2D.dispose();
+
+            bufferedImage = buffer;
+
+            if (seat.getClassSeat() == Seat.BUSINESS_CLASS && seat.isAssigned()) {
+                image = new ImageIcon(bufferedImage);
+            } else if (seat.getClassSeat() == Seat.BUSINESS_CLASS && !seat.isAssigned()) {
+                image = new ImageIcon(bufferedImage);
+            } else if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && seat.isAssigned()) {
+                image = new ImageIcon(bufferedImage);
+            } else if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && !seat.isAssigned()) {
+                image = new ImageIcon(bufferedImage);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        setPreferredSize( new Dimension( image.getIconWidth( ), image.getIconHeight( ) ) );
-        setOpaque( false );
-        lSeat.setPreferredSize( new Dimension( image.getIconWidth( ), image.getIconHeight( ) ) );
-        lSeat.setText( "" + seat.getNumber( ) );
-        lSeat.setHorizontalAlignment( SwingConstants.CENTER );
-        add( lSeat );
+
+        setPreferredSize(new Dimension(image.getIconWidth(), image.getIconHeight()));
+        setBorder(BorderFactory.createEmptyBorder());
+        setContentAreaFilled(false);
+        setOpaque(false);
     }
 
     //-----------------------------------------------------------------
     // Methods
     //-----------------------------------------------------------------
+
     /**
      * It draws the seat image
+     *
      * @param graph graph of the seat
      */
-    public void paint( Graphics graph )
-    {
-        graph.drawImage( image.getImage( ), 0, 0, null, null );
-        super.paint( graph );
+    public void paint(Graphics graph) {
+        graph.drawImage(image.getImage(), 0, 0, null, null);
+        super.paint(graph);
     }
 }
