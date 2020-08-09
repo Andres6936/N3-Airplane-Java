@@ -45,14 +45,17 @@ public class GraphicSeat extends JButton {
             bufferedImage = scaleImage(bufferedImage, 25, 25);
 
             if (seat.getClassSeat() == Seat.BUSINESS_CLASS && seat.isAssigned()) {
-
                 image = new ImageIcon(colorizeImage(bufferedImage, new Color(255, 0, 0)));
+                setToolTipText("Assigned");
             } else if (seat.getClassSeat() == Seat.BUSINESS_CLASS && !seat.isAssigned()) {
                 image = new ImageIcon(colorizeImage(bufferedImage, new Color(0, 255, 0)));
+                setToolTipText("Not Assigned");
             } else if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && seat.isAssigned()) {
                 image = new ImageIcon(bufferedImage);
+                setToolTipText("Assigned");
             } else if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && !seat.isAssigned()) {
                 image = new ImageIcon(bufferedImage);
+                setToolTipText("Not Assigned");
             }
         } catch (IOException e) {
             e.printStackTrace();
