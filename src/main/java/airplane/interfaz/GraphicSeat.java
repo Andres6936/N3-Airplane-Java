@@ -42,14 +42,7 @@ public class GraphicSeat extends JButton {
                     Objects.requireNonNull(loader.getResource(
                             "Icons/Expansion/Black/1x/figurine.png")).getFile()));
 
-            Image resize = bufferedImage.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-            BufferedImage buffer = new BufferedImage(25, 25, BufferedImage.TYPE_INT_ARGB);
-            Graphics2D graphics2D = buffer.createGraphics();
-
-            graphics2D.drawImage(resize, 0, 0, null);
-            graphics2D.dispose();
-
-            bufferedImage = buffer;
+            bufferedImage = scaleImage(bufferedImage, 25, 25);
 
             if (seat.getClassSeat() == Seat.BUSINESS_CLASS && seat.isAssigned()) {
                 image = new ImageIcon(bufferedImage);
@@ -82,5 +75,17 @@ public class GraphicSeat extends JButton {
     public void paint(Graphics graph) {
         graph.drawImage(image.getImage(), 0, 0, null, null);
         super.paint(graph);
+    }
+
+    private static BufferedImage scaleImage(final BufferedImage img, final int width, final int height)
+    {
+        Image resize = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        BufferedImage buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = buffer.createGraphics();
+
+        graphics2D.drawImage(resize, 0, 0, null);
+        graphics2D.dispose();
+
+        return buffer;
     }
 }
