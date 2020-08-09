@@ -45,9 +45,10 @@ public class GraphicSeat extends JButton {
             bufferedImage = scaleImage(bufferedImage, 25, 25);
 
             if (seat.getClassSeat() == Seat.BUSINESS_CLASS && seat.isAssigned()) {
-                image = new ImageIcon(bufferedImage);
+
+                image = new ImageIcon(colorizeImage(bufferedImage, new Color(255, 0, 0)));
             } else if (seat.getClassSeat() == Seat.BUSINESS_CLASS && !seat.isAssigned()) {
-                image = new ImageIcon(bufferedImage);
+                image = new ImageIcon(colorizeImage(bufferedImage, new Color(0, 255, 0)));
             } else if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && seat.isAssigned()) {
                 image = new ImageIcon(bufferedImage);
             } else if (seat.getClassSeat() == Seat.ECONOMIC_CLASS && !seat.isAssigned()) {
@@ -77,13 +78,24 @@ public class GraphicSeat extends JButton {
         super.paint(graph);
     }
 
-    private static BufferedImage scaleImage(final BufferedImage img, final int width, final int height)
-    {
+    private static BufferedImage scaleImage(final BufferedImage img, final int width, final int height) {
         Image resize = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         BufferedImage buffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics2D = buffer.createGraphics();
 
         graphics2D.drawImage(resize, 0, 0, null);
+        graphics2D.dispose();
+
+        return buffer;
+    }
+
+    private static BufferedImage colorizeImage(final BufferedImage img, Color color) {
+        BufferedImage buffer = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D graphics2D = buffer.createGraphics();
+        graphics2D.drawImage(img, 0, 0, null);
+        graphics2D.setComposite(AlphaComposite.SrcAtop);
+        graphics2D.setColor(color);
+        graphics2D.fillRect(0, 0, img.getWidth(), img.getHeight());
         graphics2D.dispose();
 
         return buffer;
