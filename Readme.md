@@ -7,7 +7,9 @@ while the rest is economic class. Business seats are arranged in rows of four
 separate seats int the middle of the corridor. Economic seats, however, are
 arranged in six rows, three on each side of the corridor. The outline of the plane is:
 
-![GUI](docs/specs/InterfazGUI.jpg)
+<p align="center">
+    <img src="docs/specs/InterfaceGUI.png" alt="Interface"/>
+</p>
 
 When a passenger arrives to request a seat, he indicates his personal information
 and preferences with respect to the seat position. Passenger information required
